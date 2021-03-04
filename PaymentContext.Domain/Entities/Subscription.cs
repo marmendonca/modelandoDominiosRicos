@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace PaymentContext.Domain.Entities
 {
@@ -11,5 +12,7 @@ namespace PaymentContext.Domain.Entities
         public DateTime? ExpireDate { get; set; }
 
         public bool Active { get; set; }
+
+        public List<Payment> Payments { get; set; }
     }
 }

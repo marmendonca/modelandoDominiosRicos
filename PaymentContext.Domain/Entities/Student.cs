@@ -12,6 +12,8 @@ namespace PaymentContext.Domain.Entities
 
         public string Email { get; set; }
 
+        public string Address { get; set; }
+
         public List<Subscription> Subscriptions { get; set; }
     }
 }
