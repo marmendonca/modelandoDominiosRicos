@@ -1,19 +1,45 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using PaymentContext.Domain.ValueObjects;
+using PaymentContext.Shared.Entities;
 
 namespace PaymentContext.Domain.Entities
 {
-    public class Student
+    public class Student : Entity
     {
-        public string FirstName { get; set; }
+        private IList<Subscription> _subscriptions;
 
-        public string LastName { get; set; }
+        public Name Name { get; private set; }     
 
-        public string Document { get; set; }
+        public Document Document { get; private set; }
 
-        public string Email { get; set; }
+        public Email Email { get; private set; }
 
-        public string Address { get; set; }
+        public Address Address { get; private set; }
 
-        public List<Subscription> Subscriptions { get; set; }
+        public IReadOnlyCollection<Subscription> Subscriptions { get { return _subscriptions.ToArray(); } }
+
+        public Student(Name name, Document document, Email email)
+        {
+            Name = name;
+            Document = document;
+            Email = email;
+            _subscriptions = new List<Subscription>();
+        }
+
+        public void AddSubscription(Subscription subscription)
+        {
+            var hasSubscriptionActive = false;
+
+            foreach (var sub in _subscriptions)
+            {
+                if (sub.Active)
+                    hasSubscriptionActive = true;
+            }
+
+            if (hasSubscriptionActive)
+                throw new Exception("Você já tem assinatura ativa!");
+        }
     }
 }
