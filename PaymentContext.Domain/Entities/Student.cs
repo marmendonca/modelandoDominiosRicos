@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using PaymentContext.Domain.ValueObjects;
@@ -26,6 +25,8 @@ namespace PaymentContext.Domain.Entities
             Document = document;
             Email = email;
             _subscriptions = new List<Subscription>();
+
+            AddNotifications(name, document, email);
         }
 
         public void AddSubscription(Subscription subscription)
@@ -39,7 +40,7 @@ namespace PaymentContext.Domain.Entities
             }
 
             if (hasSubscriptionActive)
-                throw new Exception("Você já tem assinatura ativa!");
+                AddNotification("Student.Subscriptions", "Você já possui uma assinatura ativa");
         }
     }
 }
