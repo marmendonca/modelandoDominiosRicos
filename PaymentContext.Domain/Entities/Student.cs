@@ -45,7 +45,8 @@ namespace PaymentContext.Domain.Entities
                 .IsFalse(hasSubscriptionActive, "Student.Subscriptions", "Você já possui uma assinatura ativa")
                 .AreEquals(0, subscription.Payments.Count, "Student.Subscriptions.Payment", "Está assinatura não possui pagamentos")
             );
-
         }
+
+        
     }
 }
